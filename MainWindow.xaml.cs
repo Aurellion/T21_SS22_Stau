@@ -22,7 +22,7 @@ namespace Stau
     public partial class MainWindow : Window
     {
         DispatcherTimer timer = new DispatcherTimer();
-        Auto[] autos = new Auto[3];
+        List<Auto> autos = new List<Auto>();
 
         public MainWindow()
         {
@@ -31,9 +31,9 @@ namespace Stau
             timer.Start();
             timer.Tick += animiere;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 10; i++)
             {
-                autos[i] = new Auto(Zeichenfläche);
+                autos.Add(new Auto(Zeichenfläche));
             }
         }
 
@@ -42,9 +42,15 @@ namespace Stau
             Zeichenfläche.Children.Clear();
             foreach (Auto item in autos)
             {
-                item.Bewegen(timer.Interval);
+                item.Bewegen(timer.Interval, Zeichenfläche);
                 item.Zeichnen(Zeichenfläche);
             }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up) autos.ForEach(x => x.beschleunigen(100));
+            if (e.Key == Key.Down) autos.ForEach(x => x.beschleunigen(-100));
         }
     }
 }
