@@ -22,8 +22,8 @@ namespace Stau
         //Konstruktor
         public Auto(Canvas Zeichenfläche)
         {
-            PositionX = 400 * rnd.NextDouble();
-            PositionY = 400 * rnd.NextDouble();
+            PositionX = rnd.Next(0, Convert.ToInt32( Zeichenfläche.Width) );
+            PositionY = rnd.Next(0, Convert.ToInt32( Zeichenfläche.Height) );
             GeschwindigkeitX = 280 + 40 * rnd.NextDouble();
             GeschwindigkeitY = 280 + 40 * rnd.NextDouble();
         }
